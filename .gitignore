@@ -1,0 +1,34 @@
+# 🛑 Ignore Python cache and temporary files
+__pycache__/
+*.log
+*.tmp
+
+# 🛑 Ignore virtual environments
+venv/
+.env
+.idea/  # PyCharm settings
+.vscode/  # VSCode settings
+
+# 🛑 Ignore generated results and datasets
+results/
+data/processed/
+data/translations/
+*.csv  # Uncomment if you want to exclude all CSV files
+*.tsv
+*.json
+*.xlsx
+
+# 🛑 Ignore compiled and executable files
+*.exe
+*.dll
+*.so
+chromedriver.exe  # Selenium WebDriver
+
+# 🛑 Ignore Jupyter Notebook temporary files
+.ipynb_checkpoints/
+
+# 🛑 Ignore archives and large files
+*.zip
+*.tar.gz
+*.rar
+*.7z
