@@ -3,7 +3,7 @@ import os
 # Define paths relative to the repository
 repo_path = os.path.dirname(os.path.abspath(__file__))  # Get the root directory of the repository
 input_file = os.path.join(repo_path, "data/context/geneval-context-wikiprofessions-2to1-test.en_ru.en")
-output_folder = os.path.join(repo_path, "data/translations/chunks-context")
+output_folder = os.path.join(repo_path, "scripts/data_preprocessing/chunks-context")
 
 chunk_size = 100  # Number of lines per batch
 
