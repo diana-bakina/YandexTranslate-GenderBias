@@ -14,8 +14,8 @@ from selenium.webdriver.support import expected_conditions as EC
 # Paths relative to the repository root
 repo_path = os.path.dirname(os.path.abspath(__file__))
 chunk_folder = os.path.join(repo_path, "..", "data_preprocessing", "chunks-context")
-output_folder = os.path.join(repo_path, "..", "data", "translations", "results-context")
-driver_path = os.path.join(repo_path, "..", "chromedriver.exe")
+output_folder = os.path.join(repo_path, "..", "..", "data", "translations", "results-context")
+driver_path = os.path.join(repo_path, "..", "..", "chromedriver.exe")
 
 # Selenium setup (abstract example)
 service = Service(driver_path)
