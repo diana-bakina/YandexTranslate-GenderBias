@@ -1,24 +1,36 @@
 import os
 import pandas as pd
+import numpy as np
 
 # Get repository root dynamically
-repo_path = os.path.dirname(os.path.abspath(__file__))  # Get script location
-data_folder = os.path.join(repo_path, "data_preprocessing")  # Where counter_sentences.csv is stored
-output_folder = os.path.join(repo_path, "data_preprocessing", "chunks-counter")  # Where chunks will be saved
+repo_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+
+# Define input and output paths
+data_folder = os.path.join(repo_path, "scripts", "data_preprocessing")
+output_folder = os.path.join(data_folder, "chunks-counter")
 
 # Ensure the output folder exists
 os.makedirs(output_folder, exist_ok=True)
 
-# Paths to files
+# Input file path
 input_csv = os.path.join(data_folder, "counter_sentences.csv")
+
+# Check if the input file exists
+if not os.path.exists(input_csv):
+    print(f"Error: File not found - {input_csv}")
+    exit(1)
 
 # Read the full dataset
 data = pd.read_csv(input_csv)
 
-# Break into portions of 200 lines
+# Split into chunks
 chunk_size = 200
-for i, chunk in enumerate(range(0, len(data), chunk_size)):
-    chunk_data = data.iloc[chunk:chunk + chunk_size]
+chunks = np.array_split(data, np.ceil(len(data) / chunk_size))
+
+# Save each chunk
+for i, chunk in enumerate(chunks):
     output_csv = os.path.join(output_folder, f"counter_chunk_{i}.csv")
-    chunk_data.to_csv(output_csv, index=False)
+    chunk.to_csv(output_csv, index=False, encoding="utf-8")
     print(f"File saved: {output_csv}")
+
+print("Chunking process completed.")

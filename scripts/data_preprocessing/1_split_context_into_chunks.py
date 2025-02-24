@@ -1,25 +1,25 @@
 import os
 
-# Define paths relative to the repository
-repo_path = os.path.dirname(os.path.abspath(__file__))  # Get the root directory of the repository
+# Define the repository root path
+repo_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+
+# Define input and output paths
 input_file = os.path.join(repo_path, "data/context/geneval-context-wikiprofessions-2to1-test.en_ru.en")
 output_folder = os.path.join(repo_path, "scripts/data_preprocessing/chunks-context")
 
-chunk_size = 100  # Number of lines per batch
+chunk_size = 100  # Number of lines per chunk
 
 # Create the output folder if it doesn't exist
 os.makedirs(output_folder, exist_ok=True)
 
-# Read the source file
+# Read the file and split into chunks
 with open(input_file, 'r', encoding='utf-8') as f:
-    lines = [line.strip() for line in f.readlines()]
+    for i, chunk in enumerate(iter(lambda: list(f.readline().strip() for _ in range(chunk_size)), [])):
+        output_file = os.path.join(output_folder, f"chunk_{i}.csv")
+        
+        with open(output_file, 'w', encoding='utf-8') as f_out:
+            f_out.write("\n".join(chunk))
 
-# Split lines into batches and save them as separate files
-for i in range(0, len(lines), chunk_size):
-    batch_lines = lines[i:i + chunk_size]
-    output_file = os.path.join(output_folder, f"chunk_{i // chunk_size}.csv")
-    
-    with open(output_file, 'w', encoding='utf-8') as f_out:
-        f_out.write("\n".join(batch_lines))
-    
-    print(f"File created: {output_file}")
+        print(f"File created: {output_file}")
+
+print("Splitting process completed.")

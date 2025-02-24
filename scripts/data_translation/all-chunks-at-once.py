@@ -12,10 +12,10 @@ from selenium.webdriver.support import expected_conditions as EC
 # Ensure that automating translations does NOT violate the service's terms of service or licensing agreements.
 
 # Paths relative to the repository root
-repo_path = os.path.dirname(os.path.abspath(__file__))
-chunk_folder = os.path.join(repo_path, "..", "data_preprocessing", "chunks-counter")
-output_folder = os.path.join(repo_path, "..", "..", "data", "translations", "results-counter")
-driver_path = os.path.join(repo_path, "..", "..", "chromedriver.exe")
+repo_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+chunk_folder = os.path.join(repo_path, "scripts", "data_preprocessing", "chunks-counter")
+output_folder = os.path.join(repo_path, "data", "translations", "results-counter")
+driver_path = os.path.join(repo_path, "chromedriver.exe")
 pause_between_requests = 2  # Pause between translation requests (in seconds)
 
 # Selenium Setup (Abstract Example)
