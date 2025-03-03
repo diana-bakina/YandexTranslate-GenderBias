@@ -1,3 +1,5 @@
+# This script uses the 'accuracy_metric' file, which is licensed under the Creative Commons Attribution-ShareAlike 3.0 License.
+
 import csv
 from accuracy_metric import accuracy_metric
 import os
